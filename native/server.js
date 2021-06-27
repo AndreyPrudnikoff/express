@@ -1,20 +1,17 @@
-const http = require('http')
-const router = require('./router')
-const client = require("../db/controller");
+const http = require("http");
+const router = require("./router");
 
 const server = http.createServer(async (req, res) => {
-    let data
-    if (req.url === '/users') {
-       await client.query('SELECT * FROM users')
-            .then(response => {
-                data = JSON.stringify(response.rows)
-            })
-            .catch(console.error)
-        res.writeHead(200, {'Content-Type': 'application0json'})
-       await res.end(data)
-    }
-    // const data = router[req.url]()
-    // res.end(data)
-})
+    let str = ''
+    if (req.method === 'POST') {
+        const chunks = []
+        req.on('data', chunk => chunks.push(chunk))
+        req.on('end', () => {
+            str = Buffer.concat(chunks)
+            router[req.method][req.url](req, res, JSON.parse(str))
+        })
+    } else router[req.method][req.url](req, res)
 
-module.exports = server
+});
+
+module.exports = server;
