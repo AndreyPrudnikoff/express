@@ -1,0 +1,15 @@
+.active {
+    text-decoration: underline;
+}
+
+h2 {
+    cursor: pointer;
+}
+
+h2:nth-child(1) {
+    margin-right: 10px;
+}
+
+h2:hover {
+    transform: scale(1.05);
+}

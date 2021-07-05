@@ -1126,6 +1126,7 @@ false Zulu
     </access-method>
     <sequence id="48" parent="19" name="users_id_seq">
       <ObjectId>24602</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>509</StateNumber>
       <DataType>integer|0s</DataType>
